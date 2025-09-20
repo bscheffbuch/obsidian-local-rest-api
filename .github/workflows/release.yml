@@ -35,4 +35,12 @@ jobs:
           gh release create "$tag" \
             --title="$tag" \
             --draft \
+            --notes "Plugin release $tag
+
+          Files included:
+          - \`main.js\` - Plugin code
+          - \`manifest.json\` - Plugin manifest  
+          - \`styles.css\` - Plugin styles
+
+          To install manually, download these files and place them in your vault's \`.obsidian/plugins/obsidian-local-rest-api/\` directory." \
             main.js manifest.json styles.css
