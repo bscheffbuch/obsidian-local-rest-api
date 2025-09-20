@@ -802,4 +802,80 @@ describe("requestHandler", () => {
         .expect(401);
     });
   });
+
+  describe("activeFileGet", () => {
+    test("no active file", async () => {
+      app.workspace._getActiveFile = null;
+
+      await request(server)
+        .get("/active/")
+        .set("Authorization", `Bearer ${API_KEY}`)
+        .expect(404);
+    });
+
+    test("active file exists", async () => {
+      const arbitraryFilename = "active-note.md";
+      const arbitraryFileContent = "# Active Note\n\nContent here";
+      const fileContentBuffer = new ArrayBuffer(arbitraryFileContent.length);
+      const fileContentBufferView = new Uint8Array(fileContentBuffer);
+      for (let i = 0; i < arbitraryFileContent.length; i++) {
+        fileContentBufferView[i] = arbitraryFileContent.charCodeAt(i);
+      }
+
+      const activeFile = new TFile();
+      activeFile.path = arbitraryFilename;
+      activeFile.stat = {
+        ctime: Date.now(),
+        mtime: Date.now(),
+        size: arbitraryFileContent.length,
+      };
+
+      app.workspace._getActiveFile = activeFile;
+      app.vault.adapter._readBinary = fileContentBuffer;
+
+      const result = await request(server)
+        .get("/active/")
+        .set("Authorization", `Bearer ${API_KEY}`)
+        .expect(200);
+
+      expect(result.header["content-location"]).toEqual(arbitraryFilename);
+      expect(result.header["content-disposition"]).toEqual(
+        `attachment; filename="${arbitraryFilename}"`
+      );
+      expect(result.header["content-type"]).toEqual(
+        "text/markdown; charset=utf-8"
+      );
+      expect(result.text).toEqual(arbitraryFileContent);
+    });
+
+    test("active file exists - JSON response", async () => {
+      const arbitraryFilename = "active-note.md";
+      const arbitraryFileContent = "# Active Note\n\nContent here";
+
+      const activeFile = new TFile();
+      activeFile.path = arbitraryFilename;
+      activeFile.stat = {
+        ctime: Date.now(),
+        mtime: Date.now(),
+        size: arbitraryFileContent.length,
+      };
+
+      app.workspace._getActiveFile = activeFile;
+      app.vault._cachedRead = arbitraryFileContent;
+      app.vault._getAbstractFileByPath = activeFile;
+
+      const result = await request(server)
+        .get("/active/")
+        .set("Authorization", `Bearer ${API_KEY}`)
+        .set("Accept", "application/vnd.olrapi.note+json")
+        .expect(200);
+
+      expect(result.header["content-location"]).toEqual(arbitraryFilename);
+      expect(result.header["content-type"]).toEqual(
+        "application/vnd.olrapi.note+json; charset=utf-8"
+      );
+      expect(result.body.path).toEqual(arbitraryFilename);
+      expect(result.body.content).toEqual(arbitraryFileContent);
+    });
+  });
 });

@@ -117,6 +117,8 @@ export class MetadataCache {
 }
 
 export class Workspace {
+  _getActiveFile: TFile | null = new TFile();
+
   async openLinkText(
     path: string,
     base: string,
@@ -125,8 +127,8 @@ export class Workspace {
     return new Promise((resolve, reject) => resolve());
   }
 
-  getActiveFile(): TFile {
-    return new TFile();
+  getActiveFile(): TFile | null {
+    return this._getActiveFile;
   }
 }
 

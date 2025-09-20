@@ -897,6 +897,11 @@ export default class RequestHandler {
   ): Promise<void> {
     const file = this.app.workspace.getActiveFile();
 
+    if (!file) {
+      this.returnCannedResponse(res, { statusCode: 404 });
+      return;
+    }
+
     return this.redirectToVaultPath(file, req, res, this._vaultGet.bind(this));
   }
 
