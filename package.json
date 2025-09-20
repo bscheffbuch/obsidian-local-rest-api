@@ -1,6 +1,6 @@
 {
   "name": "obsidian-local-rest-api",
-  "version": "3.2.0",
+  "version": "0.0.2",
   "description": "Get, change or otherwise interact with your notes in Obsidian via a REST API.",
   "main": "main.js",
   "types": "main.d.ts",
@@ -13,7 +13,7 @@
     "test": "jest"
   },
   "keywords": [],
-  "author": "",
+  "author": "bscheffbuch",
   "license": "MIT",
   "devDependencies": {
     "@types/cors": "^2.8.12",
