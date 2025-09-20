@@ -902,7 +902,11 @@ export default class RequestHandler {
       return;
     }
 
-    return this.redirectToVaultPath(file, req, res, this._vaultGet.bind(this));
+    res.set("Content-Location", encodeURI(file.path));
+    res.setHeader("Content-Type", ContentTypes.olrapiNoteJson);
+    res.send(
+      JSON.stringify(await this.getFileMetadataObject(file), null, 2)
+    );
   }
 
   async activeFilePut(
