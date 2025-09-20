@@ -42,5 +42,5 @@ jobs:
           - \`manifest.json\` - Plugin manifest  
           - \`styles.css\` - Plugin styles
 
-          To install manually, download these files and place them in your vault's \`.obsidian/plugins/obsidian-local-rest-api/\` directory." \
+          To install manually, download these files and place them in your vault's \`.obsidian/plugins/obsidian-api/\` directory." \
             main.js manifest.json styles.css

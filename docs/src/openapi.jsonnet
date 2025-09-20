@@ -746,7 +746,7 @@ std.manifestYamlDoc(
           },
         },
       },
-      '/obsidian-local-rest-api.crt': {
+      '/obsidian-api.crt': {
         get: {
           tags: [
             'System',

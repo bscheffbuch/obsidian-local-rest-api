@@ -1,9 +1,9 @@
 {
-	"id": "obsidian-local-rest-api",
-	"name": "Local REST API",
+	"id": "obsidian-api",
+	"name": "Obsidian API",
 	"version": "0.0.2",
 	"minAppVersion": "0.12.0",
-	"description": "Get, change or otherwise interact with your notes in Obsidian via a REST API.",
+	"description": "Get, change or otherwise interact with your notes in Obsidian via the Obsidian API.",
 	"author": "bscheffbuch",
 	"authorUrl": "https://github.com/bscheffbuch",
 	"isDesktopOnly": true

@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-local-rest-api",
+  "name": "obsidian-api",
   "version": "0.0.2",
   "description": "Get, change or otherwise interact with your notes in Obsidian via a REST API.",
   "main": "main.js",

@@ -470,7 +470,7 @@ export default class RequestHandler {
       .header("Deprecation", 'true; sunset-version="4.0"')
       .header(
         "Link",
-        '<https://github.com/coddingtonbear/obsidian-local-rest-api/wiki/Changes-to-PATCH-requests-between-versions-2.0-and-3.0>; rel="alternate"'
+        '<https://github.com/coddingtonbear/obsidian-api/wiki/Changes-to-PATCH-requests-between-versions-2.0-and-3.0>; rel="alternate"'
       )
       .status(200)
       .send(content);

@@ -147,7 +147,7 @@ export default class LocalRestApi extends Plugin {
 
     this.refreshServerState();
 
-    this.app.workspace.trigger("obsidian-local-rest-api:loaded");
+    this.app.workspace.trigger("obsidian-api:loaded");
   }
 
   getPublicApi(pluginManifest: PluginManifest): LocalRestApiPublicApi {
@@ -257,7 +257,7 @@ class LocalRestApiSettingTab extends PluginSettingTab {
       !getCertificateIsUptoStandards(parsedCertificate);
 
     containerEl.empty();
-    containerEl.classList.add("obsidian-local-rest-api-settings");
+    containerEl.classList.add("obsidian-api-settings");
     containerEl.createEl("h2", { text: "Local REST API" });
     containerEl.createEl("h3", { text: "How to Access" });
 
@@ -294,7 +294,7 @@ class LocalRestApiSettingTab extends PluginSettingTab {
                 this.plugin.settings.port
               }/${CERT_NAME}">this certificate</a> be
               configured as a trusted certificate authority for
-              your browser.  See <a href="https://github.com/coddingtonbear/obsidian-web/wiki/How-do-I-get-my-browser-trust-my-Obsidian-Local-REST-API-certificate%3F">wiki</a> for more information.
+              your browser.  See <a href="https://github.com/coddingtonbear/obsidian-web/wiki/How-do-I-get-my-browser-trust-my-obsidian-api-certificate%3F">wiki</a> for more information.
             </i>
           </td>
       `;
@@ -371,7 +371,7 @@ class LocalRestApiSettingTab extends PluginSettingTab {
     seeMore.innerHTML = `
       Comprehensive documentation of what API endpoints are available can
       be found in
-      <a href="https://coddingtonbear.github.io/obsidian-local-rest-api/">the online docs</a>.
+      <a href="https://coddingtonbear.github.io/obsidian-api/">the online docs</a>.
     `;
 
     containerEl.createEl("h3", { text: "Settings" });
@@ -673,7 +673,7 @@ export const getAPI = (
   app: App,
   manifest: PluginManifest
 ): LocalRestApiPublicApi | undefined => {
-  const plugin = app.plugins.plugins["obsidian-local-rest-api"];
+  const plugin = app.plugins.plugins["obsidian-api"];
   if (plugin) {
     return (plugin as unknown as LocalRestApi).getPublicApi(manifest);
   }
